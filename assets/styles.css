@@ -57,30 +57,34 @@ body {
 }
 
 .Select-control {
-    width: 500px; /* Adjust width as needed */
     height: 60px; /* Adjust height as needed */
     font-size: 16px; /* Adjust font size as needed */
     line-height: 60px; /* Adjust line height as needed */
 }
 
-.dropdown {
-    width: 500px; /* Adjust width as needed */
-    height: 60px; /* Adjust height as needed */
-    font-size: 16px; /* Adjust font size as needed */
-    line-height: 60px; /* Adjust line height as needed */
+.dropdown1 {
+    width: 600px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    font-size: 12px; /* Adjust font size as needed */
+    line-height: 40px; /* Adjust line height as needed */
 }
 
-.Select--single>.Select-control .Select-value,
+.dropdown2 {
+    width: 300px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    font-size: 12px; /* Adjust font size as needed */
+    line-height: 40px; /* Adjust line height as needed */
+}
+
+.Select--single > .Select-control .Select-value,
 .Select-placeholder {
-    line-height: 60px;
-    height: 60px;
-    width: 500px
+    line-height: 40px;
+    height: 40px;
 }
 
 .Select--multi .Select-value-label {
     height: 60px;
     line-height: 60px;
-    width: 500px;
 }
 
 .menu-title {

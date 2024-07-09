@@ -36,11 +36,13 @@ properties_1 = [ 'Prop_Asian', 'Prop_Black', 'Prop_Mixed', 'Prop_White', 'Prop_O
                  'Prop_Mixed or Multiple ethnic groups: White and Black African', 'Prop_Mixed or Multiple ethnic groups: White and Black Caribbean', 
                  'Prop_Other ethnic group: Any other ethnic group', 'Prop_Other ethnic group: Arab', 'Prop_White: English, Welsh, Scottish, Northern Irish or British', 
                  'Prop_White: Gypsy or Irish Traveller', 'Prop_White: Irish', 'Prop_White: Other White', 'Prop_White: Roma', 
-                 'Prop_Economically active (excluding full-time students): In employment', 
-                 'Prop_Economically active (excluding full-time students): Unemployed: Seeking work or waiting to start a job already obtained: Available to start working within 2 weeks', 
-                 'Prop_Economically active and a full-time student: In employment', 
-                 'Prop_Economically active and a full-time student: Unemployed: Seeking work or waiting to start a job already obtained: Available to start working within 2 weeks', 
-                 'Prop_Economically inactive (excluding full-time students)', 'Prop_Economically inactive and a full-time student', 'Prop_Aged 15 years and under', 
+                 "Prop_Econ_active_excl_students_In_employment",
+                 "Prop_Econ_active_excl_students_Unemployed_avail_within_2_weeks",
+                 "Prop_Econ_active_full_time_student_In_employment",
+                 "Prop_Econ_active_full_time_student_Unemployed_avail_within_2_weeks",
+                 "Prop_Econ_inactive_excl_students",
+                 "Prop_Econ_inactive_full_time_student",
+                 'Prop_Aged 15 years and under', 
                  'Prop_Aged 16 to 24 years', 'Prop_Aged 25 to 34 years', 'Prop_Aged 35 to 49 years', 'Prop_Aged 50 to 64 years', 'Prop_Aged 65 years and over']
 
 external_stylesheets = [
@@ -154,7 +156,7 @@ app.layout = html.Div(
                             ],
                             value=properties_1[0],
                             clearable=False,
-                            className="dropdown",
+                            className="dropdown1",
                         ),
                     ]
                 ),
@@ -169,7 +171,7 @@ app.layout = html.Div(
                             ],
                             value=properties_2[0],
                             clearable=False,
-                            className="dropdown",
+                            className="dropdown2",
                         ),
                     ]
                 ),
