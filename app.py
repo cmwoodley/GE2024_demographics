@@ -1,9 +1,9 @@
-# ./app.py
+# app.py
 import pandas as pd
-from dash import Dash, Input, Output, dcc, html
-from dash import dash_table
+from dash import Dash, Input, Output, dcc, html, dash_table
 import plotly.express as px
-import statsmodels.api as sm
+from scipy.stats import pearsonr, linregress
+import numpy as np
 
 # Load data
 GE_data = pd.read_csv("./constituency_polling_demographics.csv")
@@ -51,12 +51,22 @@ app = Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = "Election Analytics: Demographic and Vote Share Insights"
 
 def update_charts(Property_1, Property_2):
-    data_filtered = GE_data.mask(GE_data[Property_2] == 0)
+    data_filtered = GE_data.mask(GE_data[Property_2] == 0).dropna()
+
+    # Calculate trendline manually
+    x = data_filtered[Property_1]
+    y = data_filtered[Property_2]
+    
+    # Fit a linear trendline
+    z = np.polyfit(x, y, 1)
+    trendline = np.poly1d(z)
+
+    result = linregress(x,y)
+
     fig = px.scatter(
         data_filtered, 
         x=Property_1, 
         y=Property_2, 
-        trendline="ols", trendline_scope="overall", trendline_color_override="black",
         color="Winning_party",
         title="Vote Share vs Demographic Information",
         hover_data={
@@ -66,6 +76,18 @@ def update_charts(Property_1, Property_2):
             Property_2: True
         },
     )
+    
+    # Add trendline to the plot
+    fig.add_scatter(
+        x=x, 
+        y=trendline(x), 
+        mode='lines', 
+        name='Trendline', 
+        line=dict(color="#000000"), 
+        hoveron="points",
+        hoverinfo='text',  # Specify hoverinfo to enable text hover data
+        hovertext=f"R-squared: {result.rvalue**2:.2f}"
+    )    
     
     fig.update_layout(
         xaxis={"fixedrange": True},
@@ -80,31 +102,16 @@ def update_charts(Property_1, Property_2):
     return fig
 
 def update_stats(Property_1, Property_2):
-    # Assuming GE_data is a global variable containing your data
     data_filtered = GE_data[[Property_1, Property_2]].dropna()
 
-    X = data_filtered[Property_1]
-    y = data_filtered[Property_2]
-
-    X = sm.add_constant(X)  # adding a constant
-
-    model = sm.OLS(y, X).fit()
+    # Calculate Pearson correlation coefficient and p-value
+    r, p_value = pearsonr(data_filtered[Property_1], data_filtered[Property_2])
     
-    # Extracting coefficients, standard errors, t-values, p-values, and R-squared
-    coef = model.params[Property_1]
-    std_err = model.bse[Property_1]
-    t_value = model.tvalues[Property_1]
-    p_value = model.pvalues[Property_1]
-    r_squared = model.rsquared
-    
-    # Creating a summary table
+    # Prepare summary table
     summary = {
         "Variable": [Property_1],
-        "Coefficient": [coef],
-        "Std.Err.": [std_err],
-        "t-value": [t_value],
-        "P>|t|": [p_value],
-        "R-squared": [r_squared]
+        "Pearson Correlation Coefficient": [r],
+        "P-value": [p_value]
     }
 
     # Convert summary to DataFrame
