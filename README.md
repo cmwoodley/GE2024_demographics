@@ -1,13 +1,12 @@
 # GE Demographics Data Dashboard
 
-This project provides a data dashboard for visualizing election vote proportions against demographic information from constituencies in the UK. The demographic data is sourced from the Census 2021, utilizing post-2019 boundaries. Election results for GE2024 were scraped from the Sky News website using the code provided in the "web scraping" folder.
+This project provides a data dashboard for visualizing election vote proportions against demographic information from constituencies in the UK. The demographic data is sourced from the [2021 Census](https://www.ons.gov.uk/datasets/create), utilizing post-2019 boundaries. Election results and vote share for GE2024 were scraped from the Sky News website using the code provided in the "web scraping" folder.
 
-The dashboard is hosted at [ONS Dataset Portal](https://www.ons.gov.uk/datasets/create). It allows users to explore correlations between electoral outcomes and various demographic factors across constituencies.
+The dashboard is hosted at [python anywhere](https://cmwoodley.pythonanywhere.com). It allows users to explore correlations between electoral outcomes and various demographic factors across constituencies.
 
 ## Features
 
 - **Visualization of Election Vote Proportions**: Plot and analyze election vote proportions against demographic variables.
-- **Interactive Dashboard**: Explore data through an interactive web interface.
 - **Data Sources**:
   - Census 2021 demographic data
   - GE2024 election results from Sky News
